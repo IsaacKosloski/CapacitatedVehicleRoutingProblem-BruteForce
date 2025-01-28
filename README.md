@@ -18,60 +18,13 @@ This repository is perfect for:
 
 ## A Class Diagram Overview
 
-+------------------+
-|      Node        |
-+------------------+
-| int id           |
-| int demand       |
-| bool isDepot     |
-+------------------+
-| + Constructor    |
-+------------------+
-
-+------------------+
-|     Vehicle      |
-+------------------+
-| int capacity     |
-| int currentLoad  |
-| vector<int> route|
-+------------------+
-| + addNode()      |
-| + reset()        |
-| + computeCost()  |
-+------------------+
-
-+------------------+
-|  CVRPInstance    |
-+------------------+
-| vector<Node> nodes|
-| vector<Vehicle> fleet|
-| vector<vector<int>> distanceMatrix|
-| int depotId      |
-+------------------+
-| + loadInstance() |
-| + validate()     |
-+------------------+
-
-+------------------+
-|    Solution      |
-+------------------+
-| vector<vector<int>> routes|
-| int totalCost    |
-+------------------+
-| + computeCost()  |
-| + validate()     |
-| + printSolution()|
-+------------------+
-
-+------------------+
-| CVRPBruteForceSolver |
-+------------------+
-| CVRPInstance instance|
-| Solution bestSolution|
-+------------------+
-| + solve()        |
-| + evaluateCost() |
-+------------------+
+| Class                | Attributes                                      | Methods                           |
+|----------------------|-------------------------------------------------|-----------------------------------|
+| **Node**             | `int id`<br>`int demand`<br>`bool isDepot`      | `+ Constructor`                   |
+| **Vehicle**          | `int capacity`<br>`int currentLoad`<br>`vector<int> route` | `+ addNode()`<br>`+ reset()`<br>`+ computeCost()` |
+| **CVRPInstance**     | `vector<Node> nodes`<br>`vector<Vehicle> fleet`<br>`vector<vector<int>> distanceMatrix`<br>`int depotId` | `+ loadInstance()`<br>`+ validate()` |
+| **Solution**         | `vector<vector<int>> routes`<br>`int totalCost` | `+ computeCost()`<br>`+ validate()`<br>`+ printSolution()` |
+| **CVRPBruteForceSolver** | `CVRPInstance instance`<br>`Solution bestSolution` | `+ solve()`<br>`+ evaluateCost()` |
 
 ---
 
