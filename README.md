@@ -20,7 +20,7 @@ This repository is perfect for:
 
 | Class                | Attributes                                      | Methods                           |
 |----------------------|-------------------------------------------------|-----------------------------------|
-| **Node**             | `int id`<br>`int demand`<br>`bool isDepot`      | `+ Constructor`                   |
+| **Node**             | `int id`<br>`int demand`<br>`bool isDepot` <br>`bool isAvaliable`      | `+ Constructor`                   |
 | **Vehicle**          | `int capacity`<br>`int currentLoad`<br>`vector<int> route` | `+ addNode()`<br>`+ reset()`<br>`+ computeCost()` |
 | **CVRPInstance**     | `vector<Node> nodes`<br>`vector<Vehicle> fleet`<br>`vector<vector<int>> distanceMatrix`<br>`int depotId` | `+ loadInstance()`<br>`+ validate()` |
 | **Solution**         | `vector<vector<int>> routes`<br>`int totalCost` | `+ computeCost()`<br>`+ validate()`<br>`+ printSolution()` |
