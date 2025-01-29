@@ -1,5 +1,5 @@
 # 🚛 Capacitated Vehicle Routing Problem 
-# A Brute Force Approach 💪
+# 💪 A Brute Force Approach 
 
 This repository contains an implementation of a brute-force algorithm to solve the **Capacitated Vehicle Routing Problem (CVRP)**.  
 The CVRP is a classic optimization problem that focuses on determining the most efficient routes for a fleet of vehicles 🚐 with limited capacity to deliver goods 📦 to a set of customers.  
@@ -15,6 +15,16 @@ This repository is perfect for:
 - 📚 Gaining insights into the CVRP and brute-force techniques.  
 - 🔍 Comparing brute-force solutions with heuristics or metaheuristics.  
 - 🧪 Experimenting with optimization on small problem instances.  
+
+## A Class Diagram Overview
+
+| Class                | Attributes                                      | Methods                           |
+|----------------------|-------------------------------------------------|-----------------------------------|
+| **Node**             | `int id`<br>`int demand`<br>`bool isDepot` <br>`bool isAvaliable`      | `+ Constructor`                   |
+| **Vehicle**          | `int capacity`<br>`int currentLoad`<br>`vector<int> route` | `+ addNode()`<br>`+ reset()`<br>`+ computeCost()` |
+| **CVRPInstance**     | `vector<Node> nodes`<br>`vector<Vehicle> fleet`<br>`vector<vector<int>> distanceMatrix`<br>`int depotId` | `+ loadInstance()`<br>`+ validate()` |
+| **Solution**         | `vector<vector<int>> routes`<br>`int totalCost` | `+ computeCost()`<br>`+ validate()`<br>`+ printSolution()` |
+| **CVRPBruteForceSolver** | `CVRPInstance instance`<br>`Solution bestSolution` | `+ solve()`<br>`+ evaluateCost()` |
 
 ---
 
