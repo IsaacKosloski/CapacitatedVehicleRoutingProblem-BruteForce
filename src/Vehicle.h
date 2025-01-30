@@ -2,6 +2,7 @@
 
 #include "Node.h"
 
+// Represents a vehicle in the fleet.
 class Vehicle
 {
 public:

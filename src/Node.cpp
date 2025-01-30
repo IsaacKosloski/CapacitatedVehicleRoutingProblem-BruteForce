@@ -3,20 +3,20 @@
 #include "Node.h"
 
 // Default Constructor
-Node()
+Node::Node()
 {
 
 }
 
 // Constructor for Clients
-Node(int ID, int demand)
+Node::Node(int ID, int demand)
 {
     this->ID{ID};
     this->demand{demand};
 }
 
 // Constructor for Depot
-Node(bool isDepot)
+Node::Node(bool isDepot)
 {
     this->isDepos{true};
     this-ID{};

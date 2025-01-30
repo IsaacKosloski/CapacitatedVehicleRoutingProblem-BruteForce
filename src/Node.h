@@ -1,7 +1,10 @@
 /*Created by Isaac on 28/01/2025.*/
 
 #include <bits/stdc++.h> //This library is used to get a lot of functions and methods used by all code
+#include <vector>
+using namespace std;
 
+// Represents a customer or the depot.
 class Node
 {
 
