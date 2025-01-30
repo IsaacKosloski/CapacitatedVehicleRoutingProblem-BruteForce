@@ -10,21 +10,17 @@ class Scanner
 {
 public:
     int dimensionOfNodes;
-    int distanceType;
-    int explicitDistanceFormat;
-    int displayDataType;
-    int edgeWeightFormat;
-    int edgeWeightType;
+    int capacityOfVehicles;
     int col;
     int row;
     string fileName;
     vector<Component> components;
     vector<Node> nodes;
-    vector<Node> nodesDistance;
+    vector<double> nodesDistance;
 
     Scanner();
     Scanner(string fileName);
 
-    void readFile(const string &fileName, vector<Component> &components, vector<Node> &nodes, vector<Node> &nodesDistance);
+    void readFile(const string &fileName, vector<Component> &components, vector<double> &nodesDistance, vector<Node>nodes);
     bool specificationPart(string line);
 };

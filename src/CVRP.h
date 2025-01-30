@@ -2,16 +2,20 @@
 
 #include "Node.h"
 #include "Vehicle.h"
+#include "Scanner.h"
 
 // Represents the problem instance, containing all data related to nodes, vehicles, and distances.
 class CVRP
 {
 public:
-    vector<Node>    nodes;          // All nodes, including depot and customers.
-    vector<Vehicle> fleet;          // The fleet of vehicles.
-    vector<int>     distanceMatrix; // Matrix of distances between nodes.
-    int             depotID;        // ID of the depot node.
+    vector<Node>    nodes;              // All nodes, including depot and customers.
+    vector<Vehicle> fleet;              // The fleet of vehicles.
+    vector<double>  distanceMatrix;     // Matrix of distances between nodes.
+    int             depotID;            // ID of the depot node.
+    int             nodesDimension;     // The dimension of clients.
+    int             capacityOfVehicle;  // Maximum capacity of the vehicle.
+    Scanner         *scanner;           // Scanner of data file.
 
-    void loadInstance();            // Method to load instance data (from file or manually).
-    bool validate();                // Method to validate an instance (e.g., check if total demand is feasible with available vehicles).
+    void loadInstance(string fileName); // Method to load instance data (from file or manually).
+    bool validate();                    // Method to validate an instance (e.g., check if total demand is feasible with available vehicles).
 };
