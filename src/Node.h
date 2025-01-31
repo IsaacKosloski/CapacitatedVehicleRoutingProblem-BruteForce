@@ -16,5 +16,4 @@ public:
 
     Node();                   // Default Constructor
     Node(int ID, bool isAvailable, int demand); // Constructor for Clients
-    Node(bool isDepot);       // Constructor for Depot
 };

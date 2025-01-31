@@ -10,17 +10,16 @@ Vehicle::Vehicle()
 
 Vehicle::Vehicle(int capacity, int currentLoad)
 {
-    this->capacity{capacity};
-    this->currentLoad{currentLoad};
+    this->capacity =capacity;
+    this->currentLoad = currentLoad;
 }
 
 // Method to add a node to the route (checks capacity constraints).
-void
+/*void
 Vehicle::addNode(Node newNode)
 {
-    this->currentLoad + newNode.demand < this->capacity ?
-    this->route.push_back(newNode) : this->route.push_back(0);
-}
+    this->currentLoad + newNode.demand < this->capacity ? this->route.push_back(newNode) : this->route.push_back();
+}*/
 
 // Reset function to clear the route and load.
 void

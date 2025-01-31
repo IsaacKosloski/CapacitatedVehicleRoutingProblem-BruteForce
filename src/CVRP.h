@@ -1,7 +1,5 @@
 /*Created by Isaac on 30/01/2025.*/
 
-#include "Node.h"
-#include "Vehicle.h"
 #include "Scanner.h"
 
 // Represents the problem instance, containing all data related to nodes, vehicles, and distances.
@@ -15,6 +13,8 @@ public:
     int             nodesDimension;     // The dimension of clients.
     int             capacityOfVehicle;  // Maximum capacity of the vehicle.
     Scanner         *scanner;           // Scanner of data file.
+
+    CVRP(string fileName);
 
     void loadInstance(string fileName); // Method to load instance data (from file or manually).
     bool validate();                    // Method to validate an instance (e.g., check if total demand is feasible with available vehicles).

@@ -9,11 +9,11 @@ Scanner::Scanner()
 
 Scanner::Scanner(string fileName)
 {
-    this->fileName{fileName};
-    dimensionOfNodes{-1};
-    capacityOfVehicles{-1};
-    col{-1};
-    row{-1};
+    this->fileName = fileName;
+    dimensionOfNodes = -1;
+    capacityOfVehicles = -1;
+    col = -1;
+    row = -1;
 
     readFile(fileName, components, nodesDistance);
 }

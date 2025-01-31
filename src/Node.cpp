@@ -9,18 +9,10 @@ Node::Node()
 }
 
 // Constructor for Clients
-Node(int ID, bool isAvailable, int demand)
+Node::Node(int ID, bool isAvailable, int demand)
 {
-    this->ID{ID};
-    this->isAvailable{isAvailabe};
-    this->demand{demand};
-}
-
-// Constructor for Depot
-Node::Node(bool isDepot)
-{
-    this->isDepos{true};
-    this-ID{};
-    this->isAvailable{false};
-    this->demand{};
+    this->ID = ID;
+    this->isAvailable = isAvailable;
+    this->demand = demand;
+    this->isDepot = false;
 }
