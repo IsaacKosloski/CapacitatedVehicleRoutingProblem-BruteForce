@@ -1,7 +1,6 @@
 /*Created by Isaac on 30/01/2025.*/
 
 #include "Component.h"
-#include "Node.h"
 #include "Vehicle.h"
 #include <string>
 #include <sstream>
@@ -18,9 +17,9 @@ public:
     vector<Node> nodes;
     vector<double> nodesDistance;
 
-    Scanner();
-    Scanner(string fileName);
+    explicit Scanner(string fileName);
 
-    void readFile(const string &fileName, vector<Component> &components, vector<double> &nodesDistance, vector<Node>nodes);
+    void readFile(const string &fileName, vector<Component> &components, vector<double> &nodesDistance, vector<Node> &nodes);
     bool specificationPart(string line);
+
 };

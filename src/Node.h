@@ -14,6 +14,6 @@ public:
     bool isDepot;             // Indicates if the node is the depot.
     bool isAvailable;         // Indicates if the node is available to use
 
-    Node();                   // Default Constructor
-    Node(int ID, bool isAvailable, int demand); // Constructor for Clients
+    Node();
+    Node(int ID, int demand);
 };

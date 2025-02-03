@@ -1,24 +1,13 @@
 CXX = g++
-CXXFLAGS = -std=c++14 -Wall -Wextra -I src
+CXXFLAGS = -Wall -std=c++20 -g -O0
 
-SRC_DIR = src
-OBJ_DIR = obj
+SRC_FILES = src/main.cpp src/Node.cpp src/Component.cpp src/Vehicle.cpp src/Scanner.cpp src/CVRP.cpp src/Functions.cpp
+TARGET = test
 
-SRCS = $(wildcard $(SRC_DIR)/*.cpp)
-OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRCS))
-
-TARGET = CapacitatedVehicleRoutingProblem-BruteForce
-
-$(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $^
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
-
-$(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
+all:
+	$(CXX) $(CXXFLAGS) $(SRC_FILES) -o $(TARGET)
 
 clean:
-	rm -rf $(OBJ_DIR) $(TARGET)
+	rm -f $(TARGET)
 
-.PHONY: clean
+.PHONY: all clean

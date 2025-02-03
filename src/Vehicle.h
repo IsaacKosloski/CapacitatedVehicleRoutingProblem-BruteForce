@@ -1,5 +1,6 @@
 /*Created by Isaac on 28/01/2025.*/
 
+#include <vector>
 #include "Node.h"
 
 // Represents a vehicle in the fleet.
@@ -10,7 +11,6 @@ public:
     int         currentLoad;    // Current load of the vehicle.
     vector<Node> route;          // The sequence of nodes visited by the vehicle.
 
-    Vehicle();                  // Default Constructor
     Vehicle(int capacity, int currentLoad);
     void addNode(Node newNode); // Method to add a node to the route (checks capacity constraints).
     void reset();               // Reset function to clear the route and load.

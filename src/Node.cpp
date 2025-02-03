@@ -2,17 +2,25 @@
 
 #include "Node.h"
 
-// Default Constructor
 Node::Node()
 {
 
 }
 
 // Constructor for Clients
-Node::Node(int ID, bool isAvailable, int demand)
+Node::Node(int ID, int demand)
 {
     this->ID = ID;
-    this->isAvailable = isAvailable;
+
     this->demand = demand;
-    this->isDepot = false;
+    if (demand == 0)
+    {
+        this->isDepot = true;
+        this->isAvailable = false;
+    }
+    else
+    {
+        this->isDepot = false;
+        this->isAvailable = true;
+    }
 }

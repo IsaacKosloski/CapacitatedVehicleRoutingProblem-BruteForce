@@ -2,15 +2,9 @@
 
 #include "Vehicle.h"
 
-// Default Constructor
-Vehicle::Vehicle()
-{
-
-}
-
 Vehicle::Vehicle(int capacity, int currentLoad)
 {
-    this->capacity =capacity;
+    this->capacity = capacity;
     this->currentLoad = currentLoad;
 }
 
@@ -37,8 +31,10 @@ Vehicle::computeCost(vector<int>& distanceMatrix, int dimension)
 
     if (route.empty()) return cost; // Handle the empty route
 
-    for (auto iterator = this->route.begin(); iterator != this->route.end() - 1; iterator++)
-        cost = distanceMatrix[(iterator * dimension) + next(iterator)];
+    for (auto n = this->route.begin(); n != this->route.end() - 1; n++)
+        cost = distanceMatrix[(n->ID * dimension) + next(n)->ID];
+
+    return cost;
 }
 
 

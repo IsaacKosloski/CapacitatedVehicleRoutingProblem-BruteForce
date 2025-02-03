@@ -16,4 +16,6 @@ add_executable(CapacitatedVehicleRoutingProblem
         src/Scanner.cpp
         src/Scanner.h
         src/CVRP.cpp
-        src/CVRP.h)
+        src/CVRP.h
+        src/Scanner.cpp
+        src/Functions.cpp)

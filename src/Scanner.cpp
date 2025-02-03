@@ -2,10 +2,7 @@
 
 #include "Scanner.h"
 
-Scanner::Scanner()
-{
 
-}
 
 Scanner::Scanner(string fileName)
 {
@@ -15,16 +12,15 @@ Scanner::Scanner(string fileName)
     col = -1;
     row = -1;
 
-    readFile(fileName, components, nodesDistance);
+    readFile(fileName, components, nodesDistance, nodes);
 }
 
 void
-Scanner::readFile(const int &fileName, vector<Component> &components, vector<double> &nodesDistance, vector<Node>nodes)
+Scanner::readFile(const string &fileName, vector<Component> &components, vector<double> &nodesDistance, vector<Node> &nodes)
 {
-    int ID{1};
-    int nextID{1};
+    int ID = 1;
     int demand;
-    vector<double> positionComponents;
+    vector<double> positionComponents(2);
     string line{};
 
     ifstream inputFile(fileName, ios::in);
@@ -34,36 +30,81 @@ Scanner::readFile(const int &fileName, vector<Component> &components, vector<dou
 
         while(getline(inputFile, line) && !specificationPart((line)));
 
-        while (getline(inputFile, line) && line != "DEMAND_SECTION")
+        if (dimensionOfNodes <= 0)
+            throw std::runtime_error("Error: Invalid or missing DIMENSION in file.");
+
+        // Resizing vectors
+        components.resize(dimensionOfNodes);
+        nodesDistance.resize(dimensionOfNodes * dimensionOfNodes);
+
+        while (getline(inputFile, line) && line != "DEMAND_SECTION ")
         {
             istringstream ssLine(line);
-            ssLine >> ID >> positionComponents[0] >> positionComponents[1];
-            components[ID - 1] = (Component(positionComponents));
+
+            if (!(ssLine >> ID >> positionComponents[0] >> positionComponents[1]))
+            {
+                cerr << "Error: Malformed line: " << line << endl;
+                throw std::runtime_error("Invalid data format.");
+            }
+
+            if (ID - 1 >= 0 && ID - 1 < (int)components.size())
+            {
+                components[ID - 1] = Component(positionComponents);
+            }
+            else
+            {
+                cerr << "Error: ID out of range (" << ID << ")" << endl;
+                throw std::runtime_error("Invalid node ID in input file.");
+            }
         }
+
 
         for (row = 0; row < dimensionOfNodes; row++)
         {
             for (col = 0; col < dimensionOfNodes; col++)
             {
-                nodesDistance[(row * dimensionOfNodes) + col]
-                        = sqrt((pow((components[row].positionComponents[0] - components[col].positionComponents[0]), 2)
-                                     + (pow((components[row].positionComponents[1] - components[col].positionComponents[1]), 2)))));
+                vector<double> posA = components[row].getPosition();
+                vector<double> posB = components[col].getPosition();
+
+                if ((row * dimensionOfNodes) + col < (int)nodesDistance.size())
+                    nodesDistance[(row * dimensionOfNodes) + col] = sqrt(pow((posA[0] - posB[0]), 2) + pow((posA[1] - posB[1]), 2));
+                else
+                    cerr << "Warning: nodesDistance index out of range!" << endl;
+
+                //nodesDistance[(row * dimensionOfNodes) + col] = sqrt((pow((components[row].positionComponents[0] - components[col].positionComponents[0]), 2) + (pow((components[row].positionComponents[1] - components[col].positionComponents[1]), 2))));
             }
         }
-        while(getline(inputFile, line) && line != "DEPOT_SECTION")
+        while(getline(inputFile, line) && line != "DEPOT_SECTION ")
         {
             istringstream ssLine(line);
-            ssLine >> ID >> demand;
-            nodes.push_back(Node(ID, true, demand));
+            if (ssLine >> ID >> demand)
+            {
+                nodes.push_back(Node(ID, demand));
+            }
+            else
+            {
+                cerr << "Warning: Invalid line format in DEMAND_SECTION: " << line << endl;
+            }
         }
+
         getline(inputFile, line);
         istringstream ssLine(line);
         ssLine >> ID;
-        nodes[ID].isDepot = true;
-        nodes[ID].isAvailable = false;
+        if (ID - 1 >= 0 && ID - 1 < (int)nodes.size())
+        {
+            nodes[ID - 1].isDepot = true;
+            nodes[ID - 1].isAvailable = false;
+        }
+        else
+        {
+            cerr << "Error: Depot index out of range: " << ID - 1 << endl;
+        }/**/
     }
     else
+    {
+        cerr << "Error: Could not open file " << fileName << endl;
         throw std::runtime_error("Unable to open file");
+    }
 
     inputFile.close();
 }
