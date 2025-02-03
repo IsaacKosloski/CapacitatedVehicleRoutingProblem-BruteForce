@@ -9,9 +9,6 @@ class Component
 {
 
 public:
-
-// Type of how the distances (or weights) are given.
-    // The value, comes from an enum.
     int             numberOfComponents{}; // Components of distance type format
     vector<double>  positionComponents; // Graph coordinates components
 

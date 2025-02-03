@@ -2,12 +2,13 @@
 
 #include "CVRP.h"
 
+// Constructor that initializes the CVRP instance by loading data from the given file
 CVRP::CVRP(string fileName)
 {
     loadInstance(fileName);
 }
 
-// Method to load instance data (from file or manually).
+// Method to load instance data (from file or manually)
 void
 CVRP::loadInstance(string fileName)
 {

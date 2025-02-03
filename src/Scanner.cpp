@@ -2,41 +2,43 @@
 
 #include "Scanner.h"
 
-
-
+// Constructor that initializes the scanner and reads the instance file
 Scanner::Scanner(string fileName)
 {
     this->fileName = fileName;
-    dimensionOfNodes = -1;
-    capacityOfVehicles = -1;
-    col = -1;
-    row = -1;
+    dimensionOfNodes = -1;   // Initializes the number of nodes to an undefined state
+    capacityOfVehicles = -1; // Initializes vehicle capacity to an undefined state
+    col = -1;                // Column counter initialization
+    row = -1;                // Row counter initialization
 
+    // Reads the file and extracts necessary data
     readFile(fileName, components, nodesDistance, nodes);
 }
 
+// Method to read instance file and populate data structures
 void
 Scanner::readFile(const string &fileName, vector<Component> &components, vector<double> &nodesDistance, vector<Node> &nodes)
 {
-    int ID = 1;
-    int demand;
-    vector<double> positionComponents(2);
-    string line{};
+    int ID = 1; // Node ID counter
+    int demand; // Variable to store demand of a node
+    vector<double> positionComponents(2); // Stores position components (e.g., x, y coordinates)
+    string line{}; // Stores each line read from the file
 
     ifstream inputFile(fileName, ios::in);
 
     if (inputFile.is_open())
     {
-
+        // Skip lines until reaching the specification part
         while(getline(inputFile, line) && !specificationPart((line)));
 
         if (dimensionOfNodes <= 0)
             throw std::runtime_error("Error: Invalid or missing DIMENSION in file.");
 
-        // Resizing vectors
+        // Resize vectors based on the number of nodes
         components.resize(dimensionOfNodes);
         nodesDistance.resize(dimensionOfNodes * dimensionOfNodes);
 
+        // Read node coordinates
         while (getline(inputFile, line) && line != "DEMAND_SECTION ")
         {
             istringstream ssLine(line);
@@ -58,7 +60,7 @@ Scanner::readFile(const string &fileName, vector<Component> &components, vector<
             }
         }
 
-
+        // Compute the distance matrix
         for (row = 0; row < dimensionOfNodes; row++)
         {
             for (col = 0; col < dimensionOfNodes; col++)
@@ -74,6 +76,8 @@ Scanner::readFile(const string &fileName, vector<Component> &components, vector<
                 //nodesDistance[(row * dimensionOfNodes) + col] = sqrt((pow((components[row].positionComponents[0] - components[col].positionComponents[0]), 2) + (pow((components[row].positionComponents[1] - components[col].positionComponents[1]), 2))));
             }
         }
+
+        // Read node demands
         while(getline(inputFile, line) && line != "DEPOT_SECTION ")
         {
             istringstream ssLine(line);
@@ -87,6 +91,7 @@ Scanner::readFile(const string &fileName, vector<Component> &components, vector<
             }
         }
 
+        // Identify depot node
         getline(inputFile, line);
         istringstream ssLine(line);
         ssLine >> ID;
@@ -109,6 +114,7 @@ Scanner::readFile(const string &fileName, vector<Component> &components, vector<
     inputFile.close();
 }
 
+// Parses the file header to extract instance parameters
 bool
 Scanner::specificationPart(string line)
 {
