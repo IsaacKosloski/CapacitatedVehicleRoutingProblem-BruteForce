@@ -44,14 +44,74 @@ This will process the problem instance and output the optimal solution found by 
 
 ## 📊 Class Diagram Overview
 
-| Class                | Attributes                                      | Methods                           |
-|----------------------|-------------------------------------------------|-----------------------------------|
-| **Node**             | `int id`<br>`int demand`<br>`bool isDepot` <br>`bool isAvaliable`      | `+ Constructor`                   |
-| **Vehicle**          | `int capacity`<br>`int currentLoad`<br>`vector<int> route` | `+ addNode()`<br>`+ reset()`<br>`+ computeCost()` |
-| **CVRPInstance**     | `vector<Node> nodes`<br>`vector<Vehicle> fleet`<br>`vector<vector<int>> distanceMatrix`<br>`int depotId` | `+ loadInstance()`<br>`+ validate()` |
-| **Solution**         | `vector<vector<int>> routes`<br>`int totalCost` | `+ computeCost()`<br>`+ validate()`<br>`+ printSolution()` |
-| **CVRPBruteForceSolver** | `CVRPInstance instance`<br>`Solution bestSolution` | `+ solve()`<br>`+ evaluateCost()` |
+# 📋 Table
 
+| Classe            | Atributos Principais                                      | Métodos Principais                         |
+|------------------|----------------------------------------------------------|-------------------------------------------|
+| **Node**        | `int id`, `int demand`, `bool isDepot`, `bool isAvailable` | `+ Constructor()`                        |
+| **Vehicle**     | `int capacity`, `int currentLoad`, `vector<int> route`    | `+ addNode()`, `+ reset()`, `+ computeCost()` |
+| **CVRPInstance**| `vector<Node> nodes`, `vector<Vehicle> fleet`, `vector<vector<int>> distanceMatrix`, `int depotId` | `+ loadInstance()`, `+ validate()` |
+| **Solution**    | `vector<vector<int>> routes`, `int totalCost`             | `+ computeCost()`, `+ validate()`, `+ printSolution()` |
+| **Solver**      | `CVRPInstance instance`, `Solution bestSolution`          | `+ solve()`, `+ evaluateCost()`          |
+| **Scanner**     | N/A                                                       | `+ readFile()`, `+ parseData()`          |
+
+
+---
+# 📂 Diagram
+
+```mermaid
+classDiagram
+    class Node {
+        +int id
+        +int demand
+        +bool isDepot
+        +bool isAvailable
+    }
+
+    class Vehicle {
+        +int capacity
+        +int currentLoad
+        +vector<int> route
+        +addNode()
+        +reset()
+        +computeCost()
+    }
+
+    class CVRPInstance {
+        +vector<Node> nodes
+        +vector<Vehicle> fleet
+        +vector<vector<int>> distanceMatrix
+        +int depotId
+        +loadInstance()
+        +validate()
+    }
+
+    class Solution {
+        +vector<vector<int>> routes
+        +int totalCost
+        +computeCost()
+        +validate()
+        +printSolution()
+    }
+
+    class Solver {
+        +CVRPInstance instance
+        +Solution bestSolution
+        +solve()
+        +evaluateCost()
+    }
+
+    class Scanner {
+        +readFile()
+        +parseData()
+    }
+
+    Node --* CVRPInstance
+    Vehicle --* CVRPInstance
+    CVRPInstance --* Solver
+    Solution --* Solver
+    Scanner --* CVRPInstance
+```
 ---
 
 Feel free to explore, experiment, and optimize! 🧩 Let me know if you'd like to add more features or examples.  
