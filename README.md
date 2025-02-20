@@ -44,7 +44,7 @@ This will process the problem instance and output the optimal solution found by 
 
 ## 📊 Class Diagram Overview
 
-# 📋 Table
+### 📋 Table
 
 | Classe            | Atributos Principais                                      | Métodos Principais                         |
 |------------------|----------------------------------------------------------|-------------------------------------------|
@@ -57,7 +57,7 @@ This will process the problem instance and output the optimal solution found by 
 
 
 ---
-# 📂 Diagram
+### 📂 Diagram
 
 ```mermaid
 classDiagram
