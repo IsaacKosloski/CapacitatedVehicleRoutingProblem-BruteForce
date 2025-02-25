@@ -130,5 +130,42 @@ graph TD;
 
 ```
 ---
+## ➡️ Sequence Diagram
+
+```mermaid
+sequenceDiagram;
+    participant Main
+    participant CVRP
+    participant Scanner
+    participant Solver
+    participant Solution
+    Main->>CVRP: Create Instance
+    CVRP->>Scanner: Load Instance
+    Scanner->>Scanner: Read File
+    Scanner-->>CVRP: Return Data
+    CVRP-->>Main: Instance Loaded
+    Main->>Solver: Create Solver
+    Solver->>Solver: Generate Permutations
+    Solver->>Solution: Solve Problem
+    Solution->>Solution: Compute Cost
+    Solution-->>Solver: Return Cost
+    Solver->>Solution: Print Solution
+    Solution->>Main: Done
+```
+---
+## ↔️ Comunication Diagram
+
+```mermaid
+graph LR;
+    Main -- Calls --> CVRP;
+    CVRP -- Uses --> Scanner;
+    Main -- Calls --> Solver;
+    Solver -- Generates --> Permutations;
+    Solver -- Calls --> Solution;
+    Solution -- Computes --> Cost;
+    Solution -- Outputs --> Result;
+
+```
+---
 Feel free to explore, experiment, and optimize! 🧩 Let me know if you'd like to add more features or examples.  
 
