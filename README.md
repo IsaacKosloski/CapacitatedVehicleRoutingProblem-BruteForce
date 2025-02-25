@@ -127,7 +127,7 @@ classDiagram
     Component --* Scanner
     Node --* CVRP
     Vehicle --* CVRP
-    CVRPInstance --* Solver
+    CVRP --* Solver
     Solution --* Solver
     Scanner --* CVRP
 ```
