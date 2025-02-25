@@ -7,7 +7,6 @@ class CVRP
 {
 public:
     vector<Node>    nodes;              // All nodes, including depot and customers.
-    vector<Vehicle> fleet;              // The fleet of vehicles.
     vector<double>  distanceMatrix;     // Matrix of distances between nodes.
     int             depotID;            // ID of the depot node.
     int             nodesDimension;     // The dimension of clients.

@@ -18,4 +18,18 @@ add_executable(CapacitatedVehicleRoutingProblem
         src/CVRP.cpp
         src/CVRP.h
         src/Scanner.cpp
-        src/Functions.cpp)
+        src/Functions.cpp
+        src/Solution.h
+        src/Solution.cpp
+        src/Solver.h
+        src/Solver.h
+        src/Solver.cpp
+        src/CVRP.cpp
+        src/CVRP.cpp
+        src/CVRP.cpp
+        src/Solver.h
+        src/Solution.h
+        src/Solution.h
+        src/Solution.h
+        src/Scanner.cpp
+        src/Solver.cpp)

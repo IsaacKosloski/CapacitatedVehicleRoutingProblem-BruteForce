@@ -21,7 +21,18 @@ CVRP::loadInstance(string fileName)
         this->distanceMatrix.push_back(n);
 
     for (auto n : scanner->nodes)
+    {
         this->nodes.push_back(n);
+        n.isDepot ? depotID = n.ID : 0;
+    }
+
+
 
     delete scanner;
+}
+
+bool
+CVRP::validate()
+{
+    return true;
 }
