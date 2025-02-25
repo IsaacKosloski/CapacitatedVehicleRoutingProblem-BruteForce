@@ -125,11 +125,11 @@ classDiagram
     }
     
     Component --* Scanner
-    Node --* CVRPInstance
-    Vehicle --* CVRPInstance
+    Node --* CVRP
+    Vehicle --* CVRP
     CVRPInstance --* Solver
     Solution --* Solver
-    Scanner --* CVRPInstance
+    Scanner --* CVRP
 ```
 ---
 ## 🔀 Activity Diagram
