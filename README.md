@@ -19,7 +19,7 @@ This repository is perfect for:
 ## 🏗 Project Structure
 ```
 CapacitatedVehicleRoutingProblem-BruteForce/
-│── Benchmarks/     # Contains benchmark problem instances and solutions
+│── Benchmarks/    # Contains benchmark problem instances and solutions
 │── src/           # Source code of the project
 │── Makefile       # Build automation file
 │── README.md      # Project documentation
