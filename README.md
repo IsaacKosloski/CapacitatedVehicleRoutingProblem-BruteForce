@@ -51,7 +51,7 @@ This will process the problem instance and output the optimal solution found by 
 | **Node**      | `int id`, `int demand`, `bool isDepot`, `bool isAvailable`                                                                                                                   | `+ Node()`, `+ Node(int, int)`                                                                                                                                       |
 | **Component** | `int numberOfComponents`, `vector<double> positionComponents`                                                                                                                | `+ Component()`, `+ Component(vector<double>)`                                                                                                                       |
 | **Vehicle**   | `int capacity`, `int currentLoad`, `vector<int> route`                                                                                                                       | `+ addNode()`, `+ reset()`, `+ computeCost()`                                                                                                                        |
-| **CVRP**      | `vector<Node> nodes`, `vector<double> distanceMatrix`, `int depotID`, `int nodesDimension`, `int capacityOfVehicle`, `Scanner *scanner`                                      | `+ CVRP(string)`, `+ loadInstance(string)`, `+ validate()`                                                                                                           |
+| **CVRP**      | `vector<Node> nodes`, `vector<double> distanceMatrix`, `int depotID`, `int nodesDimension`, `int capacityOfVehicle`, `Scanner *scanner`                                      | `+ CVRP(string)`, `+ loadInstance(string)`,                                                                                                            |
 | **Solution**  | `double totalCost`, `vector<double> routesCosts`, `vector<vector<Node>> routes`                                                                                              | `+ computeCost(int, vector<double>)`, `+ validate()`, `+ printSolution(const char*, double, int, int)`                                                               |
 | **Scanner**   | `int dimensionOfNodes`, `capacityOfVehicles`, `int col`, `int row`, `string fileName`, `vector<Component> components`, `vector<Node> nodes`, `vector<double> nodesDistance`  | `+ Scanner(string)`, `+ readFile(const string, vector<Component>, vector<doubles>, vector<Node>)`, `+ specificationPart(string)`                                     |
 | **Solver**    | `CVRP *instance`, `Solution *bestSolution`, `vector<vector<Node>>`                                                                                                           | `+ Solver(string)`, `+ generatePermutations(const vector<Node>)`, `+ solve(Solution)`, `+ evaluateCost(Solution)`, `+ constructRoutes(const vector<Node>, int, int)` |
@@ -69,6 +69,11 @@ classDiagram
         +bool isDepot
         +bool isAvailable
     }
+    
+    class Component{
+        +int numberOfComponents
+        +vector<double> positionComponents
+    }
 
     class Vehicle {
         +int capacity
@@ -79,35 +84,47 @@ classDiagram
         +computeCost()
     }
 
-    class CVRPInstance {
-        +vector<Node> nodes
-        +vector<Vehicle> fleet
-        +vector<vector<int>> distanceMatrix
-        +int depotId
+    class CVRP {
+        +vector<Node> nodes 
+        +vector<double> distanceMatrix 
+        +int depotID
+        +int nodesDimension 
+        +int capacityOfVehicle 
+        +Scanner *scanner 
         +loadInstance()
-        +validate()
+        
     }
 
     class Solution {
-        +vector<vector<int>> routes
         +int totalCost
+        +vector<double> routeCosts
+        +vector<vector<int>> routes
         +computeCost()
-        +validate()
         +printSolution()
     }
 
     class Solver {
-        +CVRPInstance instance
-        +Solution bestSolution
-        +solve()
-        +evaluateCost()
+        +CVRP *instance
+        +Solution *bestSolution
+        +vector<vector<Node>> permutations
+        +generatePermutations()
+        +solve()        
     }
 
     class Scanner {
+        +int dimensionOfNodes
+        +int capacityOfVehicles
+        +int col
+        +int row
+        +string fileName
+        +vector<Component> components
+        +vector<Node> nodes
+        +vector<double> nodesDistance
         +readFile()
-        +parseData()
+        +specificationPart()
     }
-
+    
+    Component --* Scanner
     Node --* CVRPInstance
     Vehicle --* CVRPInstance
     CVRPInstance --* Solver
