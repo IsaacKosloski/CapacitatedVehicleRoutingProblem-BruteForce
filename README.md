@@ -19,7 +19,7 @@ This repository is perfect for:
 ## 🏗 Project Structure
 ```
 CapacitatedVehicleRoutingProblem-BruteForce/
-│── Benchmarks/     # Contains benchmark problem instances and solutions
+│── Benchmarks/    # Contains benchmark problem instances and solutions
 │── src/           # Source code of the project
 │── Makefile       # Build automation file
 │── README.md      # Project documentation
@@ -51,7 +51,7 @@ This will process the problem instance and output the optimal solution found by 
 | **Node**      | `int id`, `int demand`, `bool isDepot`, `bool isAvailable`                                                                                                                   | `+ Node()`, `+ Node(int, int)`                                                                                                                                       |
 | **Component** | `int numberOfComponents`, `vector<double> positionComponents`                                                                                                                | `+ Component()`, `+ Component(vector<double>)`                                                                                                                       |
 | **Vehicle**   | `int capacity`, `int currentLoad`, `vector<int> route`                                                                                                                       | `+ addNode()`, `+ reset()`, `+ computeCost()`                                                                                                                        |
-| **CVRP**      | `vector<Node> nodes`, `vector<double> distanceMatrix`, `int depotID`, `int nodesDimension`, `int capacityOfVehicle`, `Scanner *scanner`                                      | `+ CVRP(string)`, `+ loadInstance(string)`, `+ validate()`                                                                                                           |
+| **CVRP**      | `vector<Node> nodes`, `vector<double> distanceMatrix`, `int depotID`, `int nodesDimension`, `int capacityOfVehicle`, `Scanner *scanner`                                      | `+ CVRP(string)`, `+ loadInstance(string)`,                                                                                                            |
 | **Solution**  | `double totalCost`, `vector<double> routesCosts`, `vector<vector<Node>> routes`                                                                                              | `+ computeCost(int, vector<double>)`, `+ validate()`, `+ printSolution(const char*, double, int, int)`                                                               |
 | **Scanner**   | `int dimensionOfNodes`, `capacityOfVehicles`, `int col`, `int row`, `string fileName`, `vector<Component> components`, `vector<Node> nodes`, `vector<double> nodesDistance`  | `+ Scanner(string)`, `+ readFile(const string, vector<Component>, vector<doubles>, vector<Node>)`, `+ specificationPart(string)`                                     |
 | **Solver**    | `CVRP *instance`, `Solution *bestSolution`, `vector<vector<Node>>`                                                                                                           | `+ Solver(string)`, `+ generatePermutations(const vector<Node>)`, `+ solve(Solution)`, `+ evaluateCost(Solution)`, `+ constructRoutes(const vector<Node>, int, int)` |
@@ -69,6 +69,11 @@ classDiagram
         +bool isDepot
         +bool isAvailable
     }
+    
+    class Component{
+        +int numberOfComponents
+        +vector<double> positionComponents
+    }
 
     class Vehicle {
         +int capacity
@@ -79,40 +84,52 @@ classDiagram
         +computeCost()
     }
 
-    class CVRPInstance {
-        +vector<Node> nodes
-        +vector<Vehicle> fleet
-        +vector<vector<int>> distanceMatrix
-        +int depotId
+    class CVRP {
+        +vector<Node> nodes 
+        +vector<double> distanceMatrix 
+        +int depotID
+        +int nodesDimension 
+        +int capacityOfVehicle 
+        +Scanner *scanner 
         +loadInstance()
-        +validate()
+        
     }
 
     class Solution {
-        +vector<vector<int>> routes
         +int totalCost
+        +vector<double> routeCosts
+        +vector<vector<int>> routes
         +computeCost()
-        +validate()
         +printSolution()
     }
 
     class Solver {
-        +CVRPInstance instance
-        +Solution bestSolution
-        +solve()
-        +evaluateCost()
+        +CVRP *instance
+        +Solution *bestSolution
+        +vector<vector<Node>> permutations
+        +generatePermutations()
+        +solve()        
     }
 
     class Scanner {
+        +int dimensionOfNodes
+        +int capacityOfVehicles
+        +int col
+        +int row
+        +string fileName
+        +vector<Component> components
+        +vector<Node> nodes
+        +vector<double> nodesDistance
         +readFile()
-        +parseData()
+        +specificationPart()
     }
-
-    Node --* CVRPInstance
-    Vehicle --* CVRPInstance
-    CVRPInstance --* Solver
+    
+    Component --* Scanner
+    Node --* CVRP
+    Vehicle --* CVRP
+    CVRP --* Solver
     Solution --* Solver
-    Scanner --* CVRPInstance
+    Scanner --* CVRP
 ```
 ---
 ## 🔀 Activity Diagram
@@ -127,6 +144,43 @@ graph TD;
     Routes -->|Evaluate Solution| Solution["Compute and validate solution"];
     Solution -->|Output Results| Output["Print solution and cost"];
     Output --> End((End));
+
+```
+---
+## ➡️ Sequence Diagram
+
+```mermaid
+sequenceDiagram;
+    participant Main
+    participant CVRP
+    participant Scanner
+    participant Solver
+    participant Solution
+    Main->>CVRP: Create Instance
+    CVRP->>Scanner: Load Instance
+    Scanner->>Scanner: Read File
+    Scanner-->>CVRP: Return Data
+    CVRP-->>Main: Instance Loaded
+    Main->>Solver: Create Solver
+    Solver->>Solver: Generate Permutations
+    Solver->>Solution: Solve Problem
+    Solution->>Solution: Compute Cost
+    Solution-->>Solver: Return Cost
+    Solver->>Solution: Print Solution
+    Solution->>Main: Done
+```
+---
+## ↔️ Comunication Diagram
+
+```mermaid
+graph LR;
+    Main -- Calls --> CVRP;
+    CVRP -- Uses --> Scanner;
+    Main -- Calls --> Solver;
+    Solver -- Generates --> Permutations;
+    Solver -- Calls --> Solution;
+    Solution -- Computes --> Cost;
+    Solution -- Outputs --> Result;
 
 ```
 ---

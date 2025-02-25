@@ -16,5 +16,4 @@ public:
     CVRP(string fileName);
 
     void loadInstance(string fileName); // Method to load instance data (from file or manually).
-    bool validate();                    // Method to validate an instance (e.g., check if total demand is feasible with available vehicles).
 };

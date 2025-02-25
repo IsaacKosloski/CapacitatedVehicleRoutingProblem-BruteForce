@@ -6,12 +6,6 @@ Solution::Solution()
 {
     int currentLoad = 0;
     int vehicleCount = 0;
-
-
-    for (auto client : route)
-    {
-
-    }
 }
 
 double
@@ -26,8 +20,8 @@ Solution::computeCost(int dimensionOfNodes, vector<double> &matrixCost)
 
         for (size_t i = 0; i < route.size() - 1; ++i)
         {
-            auto fromNode = route[i].ID;
-            auto toNode = route[i + 1].ID;
+            auto fromNode = route[i];
+            auto toNode = route[i + 1];
 
             // Ensure matrix index is valid
             routeCost += matrixCost[fromNode * dimensionOfNodes + toNode];
@@ -53,7 +47,7 @@ Solution::printSolution(const char* fileName, double elapsedTime, int iterations
         {
             outputFile << "Route #" << route << ": ";
             for (const auto &element : row)
-                outputFile << element.ID << " ";
+                outputFile << element << " ";
             outputFile << endl;
             route++;
         }
