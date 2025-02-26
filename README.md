@@ -38,7 +38,7 @@ where `input_file.vrp` is a valid CVRP instance file from the `Benchmarks/` dire
 
 ## 📌 Example Usage
 ```
-./cvrp_solver Benchmarks/A/A-n32-k5.vrp
+./bin/cvrp_solver Benchmarks/T/T-n5-k5.vrp Output/T/T-n5-k5.sol
 ```
 This will process the problem instance and output the optimal solution found by the brute-force algorithm.
 

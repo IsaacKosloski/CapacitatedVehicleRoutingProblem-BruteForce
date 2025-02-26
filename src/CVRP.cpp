@@ -30,9 +30,3 @@ CVRP::loadInstance(string fileName)
 
     delete scanner;
 }
-
-bool
-CVRP::validate()
-{
-    return true;
-}

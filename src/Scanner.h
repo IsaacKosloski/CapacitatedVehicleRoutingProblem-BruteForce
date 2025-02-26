@@ -1,4 +1,5 @@
 /*Created by Isaac on 30/01/2025.*/
+#pragma once
 
 #include "Component.h"
 #include "Vehicle.h"

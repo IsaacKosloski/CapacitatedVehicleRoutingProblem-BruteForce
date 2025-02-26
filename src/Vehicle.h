@@ -1,4 +1,5 @@
 /*Created by Isaac on 28/01/2025.*/
+#pragma once
 
 #include <vector>
 #include "Node.h"
